@@ -94,7 +94,7 @@ for lr in  Lr:
         Adam1 = optimizers.Nadam(learning_rate=lr, beta_1 = beta1)        
         InputA = Input(shape=(256,256,3))
         InputB = Input(shape=(256,256,3))
-        model, track1_similarity, track2_similarity = CATNet2.bulid(InputA, InputB)
+        model, track1_similarity, track2_similarity = DeepPATHO.bulid(InputA, InputB)
         
         model.compile(optimizer = Adam1, loss = 'binary_crossentropy',metrics=['accuracy'])
         history = model.fit(traingenerator,
