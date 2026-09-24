@@ -13,7 +13,7 @@ def ImgDataParameters(Rescale = 1. / 255,Shear_Range = 0.0,Zoom_Range = 0.0,Hori
         horizontal_flip = Horizontal_Flip)
     return datagen
 def DataGenerator(inputdir,datatype,datagen,targetsize=(256, 256),colormode = "grayscale",batchsize = 32, classmode = 'binary', Seed = 42, Shuffle = True):
-        data_generator = datagen.flow_from_director(
+        data_generator = datagen.flow_from_directory(
         directory=r"./%s/%s/"%(datatype,inputdir),
         target_size=targetsize,
         color_mode = colormode,
@@ -23,4 +23,4 @@ def DataGenerator(inputdir,datatype,datagen,targetsize=(256, 256),colormode = "g
          seed = Seed
                          )
         Step_size = data_generator.n//data_generator.batch_size
-        return data_generator, step_size
+        return data_generator, Step_size

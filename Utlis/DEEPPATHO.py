@@ -1,3 +1,5 @@
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # sibling modules below are imported by bare name
 import numpy as np
 import tensorflow as tf
 from Dilationlayer import Dilationlayer,CNNlayer
@@ -70,8 +72,6 @@ class DeepPATHO_core():
         modelt2 = Dropout(0.7)(modelt2)
         print("<<orginal>>")
         print(modelt1)
-        print("<<image_order>>")
-        print(K.image_dim_ordering())
 #         print("<<transpose>>")
         f = Upscale().multiply1(modelt2)
         g = Downscale().multiply1(modelt1)

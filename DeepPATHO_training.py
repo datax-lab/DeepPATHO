@@ -24,13 +24,12 @@ from sklearn.metrics import precision_recall_curve
 from sklearn.model_selection import train_test_split,KFold
 
 from tensorflow.keras.layers import Input
-from tensorflow.keras.utils import multi_gpu_model
 from tensorflow.keras.models import Sequential, save_model
 from tensorflow.keras import optimizers
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers.schedules import ExponentialDecay
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from keras.callbacks import EarlyStopping, ModelCheckpoint
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from DataGenetors import ImgDataParameters,DataGenerator
 from Utlis.DEEPPATHO import DeepPATHO
@@ -97,18 +96,19 @@ for lr in  Lr:
         model, track1_similarity, track2_similarity = DeepPATHO.bulid(InputA, InputB)
         
         model.compile(optimizer = Adam1, loss = 'binary_crossentropy',metrics=['accuracy'])
-        history = model.fit(traingenerator,
+        history = model.fit(train_generator,
                         steps_per_epoch=int(96627/(16)),
                         epochs = epochs,
-                        validation_data = validationgenerator,
+                        validation_data = validation_generator,
                         validation_steps = int(22298/(16)),                    
                         use_multiprocessing=False,
                         shuffle=True)
         
-        ac = model.evaluate(testgenerator, steps=int(29731/(16)))
+        ac = model.evaluate(test_generator, steps=int(29731/(16)))
         model.save_weights('newweightsnn1probnew.tf')
         model.save_weights('newweightsnn12probnew.h5')
         model.save("newmodelnn13probnew.h5")
         
+        os.makedirs('./history', exist_ok=True)
         with open('./history/historyn6.txt', 'wb') as file_pi:
             pickle.dump(history.history, file_pi)
