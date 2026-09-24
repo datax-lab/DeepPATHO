@@ -84,7 +84,7 @@ class DeepPATHO_core():
         modelt2a = Dropout(0.7)(modelt2a)
         model3_l = Cropping2D(cropping=((5,6), (5, 6)),
                          )(modelt2a)
-        model4_l = Reshape((4, 4,192))(modelt1a)
+        model4_l = Reshape((15, 15,192))(modelt1a)
         print(model3_l)
         print(model4_l)
         CATNet_Track1flat = GlobalAveragePooling2D()(modelt1a)
